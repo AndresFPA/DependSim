@@ -56,7 +56,7 @@ noises_sd_lin <- c()
 
 #Initiate loop to get all results
 system.time(for(j in seq_along(noises_r2)){
-  noise <- optimize(linear_noise, c(0, 6), wanted_R2 = noises_r2[j], samp_size = 10, tol = 0.001)$minimum
+  noise <- optimize(linear_noise, c(0, 6), wanted_R2 = noises_r2[j], samp_size = 5000, tol = 0.001)$minimum
   noises_sd_lin[j] <- noise
 })
 
@@ -69,7 +69,7 @@ noises_sd_quad <- c()
 
 #Initiate loop to get all results
 system.time(for(j in seq_along(noises_r2)){
-  a <- optimize(quadratic_noise, c(0, 6), wanted_R2 = noises_r2[j], samp_size = 10, tol = 0.001)$minimum
+  a <- optimize(quadratic_noise, c(0, 6), wanted_R2 = noises_r2[j], samp_size = 5000, tol = 0.001)$minimum
   noises_sd_quad[j] <- a
 })
 
@@ -84,7 +84,7 @@ noises_sd_exponen <- c()
 
 #Initiate loop to get all results
 system.time(for(j in seq_along(noises_r2)){
-  a <- optimize(exponential_noise, c(0, 6), wanted_R2 = noises_r2[j], samp_size = 10, tol = 0.001)$minimum
+  a <- optimize(exponential_noise, c(0, 6), wanted_R2 = noises_r2[j], samp_size = 5000, tol = 0.001)$minimum
   noises_sd_exponen[j] <- a
 })
 
@@ -97,7 +97,7 @@ noises_sd_sine <- c()
 
 #Initiate loop to get all results
 system.time(for(j in seq_along(noises_r2)){
-  a <- optimize(sine_noise, c(0, 6), wanted_R2 = noises_r2[j], samp_size = 10, tol = 0.001)$minimum
+  a <- optimize(sine_noise, c(0, 6), wanted_R2 = noises_r2[j], samp_size = 5000, tol = 0.001)$minimum
   noises_sd_sine[j] <- a
 })
 
