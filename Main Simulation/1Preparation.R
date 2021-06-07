@@ -69,14 +69,14 @@ cross <- function(x, noise = 0){
   return(y)
 }
 
-### Initialize the factors of your design:
+### Initialize the factors of the design:
 samp <- c(10, 20, 35, 50, 75, 100, 150, 500)
 noise <- c("Low", "Medium", "High")
 relationship <- c("linear", "quadratic", "exponential", "sinwave", "cross")
 
-##And create the simulation design matrix (full factorial)
+##And create the simulation design matrix
 # Design is a data.frame with all possible combinations of the factor levels
-# Each row of the design matrix represents a cell of your simulation design
+# Each row of the design matrix represents a cell of the simulation design
 Design <- expand.grid(samp = samp, noise = noise, relationship = relationship)
 
 ###Preparation of the analysis:
@@ -89,7 +89,7 @@ install.packages("Hmisc")
 install.packages("entropy")
 install.packages("np")
 
-#Always use library() to activate the package
+#Use library() to activate the package
 library(HHG)
 library(dHSIC)
 library(mpmi)
@@ -108,7 +108,7 @@ source("HoeffSim.R")
 source("dcorSim.R")
 source("MISim.R")
 
-#For Type I Error rate
+#For Type I Error rate----
 no_relationship <- function(x, noise){
   y <- rnorm(length(x))
   return(y)
