@@ -1,17 +1,17 @@
 # Collect all results and put it in a matrix
 # original design is in the matrix Design
 # Total number of rows of Design = TotalCells
-#first load one workspace, for example, cell 1 of the Design matrix
+#first load one cell 1 of the Design matrix
 #save the number of replications within that cell
 setwd("C:/Users/Andres/Desktop/Leiden/Thesis/sim/Mine")
 TotalCells <- 1 
 Row <- 1
 load(file.path("results",paste("MyResult", "Row", Row,".Rdata" , sep ="")))
-K <- nrow(MyResult)
+K <- nrow(MyResult) #Get K replications
 #Initialize a very large matrix with number of rows = K * TotalCells
 TotalCells <- nrow(Design)
 Results_sim <- matrix(NA, ncol = ncol(MyResult), nrow = K*TotalCells)
-#Fill in this matrix with the results that you obtained for each cell of the design (= each of the workspaces).
+#Fill in this matrix with the results that obtained for each cell of the design.
 #Thus loop over the rows of Design
 for (i in 1:TotalCells){
   Row <- i
@@ -19,18 +19,19 @@ for (i in 1:TotalCells){
   Results_sim[(K*(i-1)+1):(i*K), ] <- MyResult
 }
 
-#repeate the Design matrix K times
+#repeate the Design matrix K times to use later in the final results matrix
 Results_des <- Design[rep(1:nrow(Design),each=K),]
 rownames(Results_des) <- 1:nrow(Results_des)
 
-#rbind the vector 1:K TotalCelss times
+#rbind the vector 1:K TotalCells times
 Results_K <- do.call(what = rbind, args = replicate(TotalCells, matrix(c(1:K), ncol = 1), simplify = F))
 #Create the final results matrix
 ResultsSimAll <-as.data.frame(cbind(Results_des, K = Results_K, Results_sim))
 #Give the columns the right name:
 names(ResultsSimAll) <- c(names(Design), "K","Pearson", "Kendall", "Spearman", 
                           "HHG", "HSIC", "Hoeff", "dCor", "MI", "HHG/Pearson")
-head(ResultsSimAll)
+
+head(ResultsSimAll) #Check it is right
 
 save(ResultsSimAll, file = "AllResultsSim.Rdata")
 #Optionally save it as a .sav file
@@ -49,7 +50,7 @@ K <- nrow(MyResult)
 #Initialize a very large matrix with number of rows = K * TotalCells
 TotalCells_no <- nrow(Design_no)
 Results_sim_no <- matrix(NA, ncol = ncol(MyResult), nrow = K*TotalCells_no)
-#Fill in this matrix with the results that you obtained for each cell of the design (= each of the workspaces).
+#Fill in this matrix with the results obtained for each cell of the design (= each of the workspaces).
 #Thus loop over the rows of Design
 for (i in 1:TotalCells){
   Row <- i
