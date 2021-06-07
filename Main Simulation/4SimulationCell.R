@@ -21,7 +21,7 @@ SimulationCell <- function(Design = Design, RowOfDesign = 1, K = 1000) {
     MyAnalysisResult6 <- Hoeff_sim(SimDat)
     MyAnalysisResult7 <- dcor_sim(SimDat)
     MyAnalysisResult8 <- MI_sim(SimDat)
-    MyAnalysisResult9 <- min(MyAnalysisResult1, MyAnalysisResult4) * 2
+    MyAnalysisResult9 <- min(MyAnalysisResult1, MyAnalysisResult4) * 2 #HHG and Pearson with Bonferroni correction
     
     # Evaluate the analysis results
     MyResult1 <- EvaluationPC(MyAnalysisResult1)
@@ -34,7 +34,7 @@ SimulationCell <- function(Design = Design, RowOfDesign = 1, K = 1000) {
     MyResult8 <- EvaluationPC(MyAnalysisResult8)
     MyResult9 <- EvaluationPC(MyAnalysisResult9)
 
-    # store the results in the right row k of your result matrix:
+    # store the results in the right row k of the result matrix:
     MyResult[k, ] <- c(
       MyResult1, MyResult2,
       MyResult3, MyResult4,
